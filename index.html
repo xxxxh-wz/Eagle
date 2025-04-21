@@ -470,7 +470,7 @@
             top: 0;
             bottom: 0;
             left: 50%;
-            width: 2px;
+            width: 2px; 
             background-color: #fff;
             z-index: 10;
         }
@@ -831,6 +831,334 @@
             animation-delay: calc(var(--index, 0) * 0.1s);
             opacity: 0;
         }
+
+        /* Case Gallery Styles - Updated for consistent width */
+        .case-gallery-container {
+            max-width: 90%;  /* Keep consistent with other content sections */
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .main-display {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .display-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* Prevent interaction with hidden items */
+            z-index: 0; /* Keep hidden items behind */
+        }
+
+        .display-item.active {
+            opacity: 1;
+            z-index: 2; /* Ensure active item is on top */
+            pointer-events: auto; /* Allow interaction with active item */
+        }
+
+        .display-item img, .display-item video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .thumbnail-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .thumbnails-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .thumbnails {
+            display: flex;
+            transition: transform 0.5s ease;
+            padding: 5px 0;
+        }
+
+        .thumbnail {
+            flex: 0 0 auto;
+            width: 180px;
+            margin-right: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            position: relative;
+        }
+
+        .thumbnail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0.9;
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border: 2px solid #76b900;
+        }
+
+        .thumbnail img, .thumbnail video {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .thumbnail-caption {
+            text-align: center;
+            padding: 8px 5px;
+            font-size: 0.85em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .scroll-btn {
+            background-color: #76b900;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .scroll-btn:hover {
+            background-color: #5f9700;
+            transform: scale(1.1);
+        }
+
+        .scroll-btn.left {
+            left: -20px;
+        }
+
+        .scroll-btn.right {
+            right: -20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-display {
+                height: 300px;
+            }
+            
+            .thumbnail {
+                width: 140px;
+                margin-right: 10px;
+            }
+
+            .thumbnail img, .thumbnail video {
+                height: 80px;
+            }
+
+            .scroll-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Add these new styles for side-by-side comparison */
+        .comparison-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            gap: 15px;
+        }
+        
+        .input-side, .output-side {
+            width: 49%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .input-side img, .output-side img, .input-side video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .divider {
+            width: 2px;
+            height: 90%;
+            background-color: #76b900;
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-container {
+                flex-direction: column;
+            }
+            
+            .input-side, .output-side {
+                width: 100%;
+                height: 49%;
+            }
+            
+            .divider {
+                width: 90%;
+                height: 2px;
+                margin: 5px 0;
+            }
+        }
+
+        /* Updated styles for improved input/output comparison */
+        .comparison-panel {
+            width: 47%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            transition: transform 0.3s ease;
+        }
+        
+        .comparison-panel:hover {
+            transform: translateY(-5px);
+        }
+        
+        .panel-label {
+            background-color: #76b900;
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .input-panel .panel-label {
+            background-color: #2d7dd2;
+        }
+        
+        .output-panel .panel-label {
+            background-color: #76b900;
+        }
+        
+        .panel-content {
+            flex: 1;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            overflow: hidden;
+        }
+        
+        .panel-content img, .panel-content video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            width: auto;
+            height: auto;
+        }
+        
+        /* Handle portrait-oriented content better */
+        .comparison-container .input-panel .panel-content img {
+            max-height: 100%;
+            width: auto;
+            object-position: center;
+        }
+        
+        .transform-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #76b900;
+            font-size: 24px;
+            background-color: rgba(118, 185, 0, 0.1);
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-container {
+                flex-direction: column;
+            }
+            
+            .comparison-panel {
+                width: 100%;
+                height: auto;
+                margin-bottom: 15px;
+            }
+            
+            .transform-arrow {
+                transform: rotate(90deg);
+                margin: 5px 0;
+            }
+        }
+
+        .output-textarea {
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            line-height: 1.5;
+            overflow-y: auto;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: left;
+            white-space: pre-line;
+        }
+        
+        .output-textarea:focus {
+            outline: none;
+        }
+        
+        /* Make output textarea work with animations */
+        .fade-in .output-textarea,
+        .from-left .output-textarea,
+        .from-right .output-textarea,
+        .scale-in .output-textarea {
+            transition: inherit;
+        }
     </style>
 </head>
 
@@ -845,8 +1173,6 @@
         <h1 data-aos="fade-down" data-aos-duration="1000">
             Eagle 2.5: Boosting Long-Context Post-Training </br> for Frontier Vision-Language Models
         </h1>
-<!-- Wonmin Byeon, Matthieu Le, Max Ehrlich, Tong Lu1, Limin Wang1, Bryan Catanzaro, Jan Kautz, Andrew Tao,
-Zhiding Yu†, Guilin Liu† -->
         <!-- Add author and institution information -->
         <div style="margin-top: 30px; text-align: center;">
             <p style="font-size: 1.4em; margin-bottom: 5px; width: 80%; margin: auto">
@@ -862,7 +1188,7 @@ Zhiding Yu†, Guilin Liu† -->
                 <a href="https://zhiqi-li.github.io/" target="_blank" style="color: #6f6f6f; text-decoration: none;">Matthieu Le</a><sup style="font-size: 0.6em;">1</sup>&nbsp;&nbsp;&nbsp;
                 <a href="https://maxlikelihood.ai/" target="_blank" style="color: #6f6f6f; text-decoration: none;">Max Ehrlich</a><sup style="font-size: 0.6em;">1</sup>&nbsp;&nbsp;&nbsp;
                 <a href="" target="_blank" style="color: #6f6f6f; text-decoration: none;">Tuomas Rintamaki</a><sup style="font-size: 0.6em;">1</sup>&nbsp;&nbsp;&nbsp;
-                <a href="" target="_blank" target="_blank" style="color: #6f6f6f; text-decoration: none;">Tyler Poon</a><sup style="font-size: 0.6em;">1</sup>&nbsp;&nbsp;&nbsp;
+                <a href="" target="_blank" style="color: #6f6f6f; text-decoration: none;">Tyler Poon</a><sup style="font-size: 0.6em;">1</sup>&nbsp;&nbsp;&nbsp;
                 <a href="https://cs.nju.edu.cn/lutong/" target="_blank" style="color: #6f6f6f; text-decoration: none;">Tong Lu</a><sup style="font-size: 0.6em;">2</sup>&nbsp;&nbsp;&nbsp;
                 <a href="https://wanglimin.github.io/" target="_blank" style="color: #6f6f6f; text-decoration: none;">Limin Wang</a><sup style="font-size: 0.6em;">2</sup>&nbsp;&nbsp;&nbsp;
                 <a href="https://scholar.google.com/citations?user=UZ6kI2AAAAAJ" target="_blank" style="color: #6f6f6f; text-decoration: none;">Bryan Catanzaro</a><sup style="font-size: 0.6em;">1</sup>&nbsp;&nbsp;&nbsp;
@@ -891,21 +1217,21 @@ Zhiding Yu†, Guilin Liu† -->
                 <div style="position: relative; display: inline-block;">
                     <sup style="position: absolute; left: -10px; top: -5px;">2</sup>
                     <a href="https://www.nju.edu.cn/index.htm" style="text-decoration: none; font-size: 16px;">
-                        <img src="https://www.nju.edu.cn/__local/F/7A/1D/91723945F34FAA0A9C67700CF8F_13B47AE2_E3A7.png" alt="Berkeley Logo"
+                        <img src="https://www.nju.edu.cn/__local/F/7A/1D/91723945F34FAA0A9C67700CF8F_13B47AE2_E3A7.png" alt="NJU Logo"
                             style="width: auto; height: 40px;">
                     </a>
                 </div>
                 <div style="position: relative; display: inline-block;">
                     <sup style="position: absolute; left: -10px; top: -5px;">3</sup>
                     <a href="https://www.polyu.edu.hk/tc/" style="text-decoration: none; font-size: 16px;">
-                        <img src="https://www.polyu.edu.hk/assets/img/main-logo-3x.png" alt="Berkeley Logo"
+                        <img src="https://www.polyu.edu.hk/assets/img/main-logo-3x.png" alt="PolyU Logo"
                             style="width: auto; height: 40px;">
                     </a>
                 </div>
                 <div style="position: relative; display: inline-block;"> 
                     <sup style="position: absolute; left: -10px; top: -5px;">4</sup>
                     <a href="https://www.rutgers.edu/" style="text-decoration: none; font-size: 16px;">
-                        <img src="https://1000logos.net/wp-content/uploads/2017/08/Logo-Rutgers-University.jpg" alt="Berkeley Logo"
+                        <img src="https://1000logos.net/wp-content/uploads/2017/08/Logo-Rutgers-University.jpg" alt="Rutgers Logo"
                             style="width: auto; height: 40px;">
                     </a>
                 </div>
@@ -983,146 +1309,701 @@ Zhiding Yu†, Guilin Liu† -->
 
     </div>
 
-
-    <!-- <div class="gallery-container">
-        <section class="gallery" id="gallery">
-            <div class="gallery-item item1">
-                <img src="asset/teaser.jpg" alt="Image 1" data-description='Overview of NVILA Results'>
+    <div class="case-gallery-container" data-aos="fade-up" data-aos-duration="1000">
+        <div class="main-display">
+            <div class="display-item active" id="display-item-1">
+                <div class="comparison-container">
+                    <div class="comparison-panel input-panel">
+                        <div class="panel-label">Image/Video input</div>
+                        <div class="panel-content">
+                            <img src="asset/image_cases/case1.gif" alt="Input Case Study 1">
+                        </div>
+                    </div>
+                    <div class="transform-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="comparison-panel output-panel">
+                        <div class="panel-label">Chat (Raw output)</div>
+                        <div class="panel-content">
+                            <div class="output-textarea">
+                                <strong>User:</strong>
+                                Watch the video and list the paper titles in a table.
+                                <br><br>
+                                <strong>Eagle-2.5-8B:</strong>
+                                <br>Here is a table listing the paper titles shown in the video:
+                                <br><br>
+                                | Title |
+                                <br>|------|
+                                <br>| A New Sequential Prediction Framework with Spatial-temporal Embedding |
+                                <br>| NewW CRFs: Neural Window Fully-connected CRFs for Monocular Depth Estimation |
+                                <br>| OFA: Unifying Architectures, Tasks, and Modalities Through a Simple Sequence-to-Sequence Learning Framework |
+                                <br>| Deep Unified Representation for Heterogeneous Recommendation |
+                                <br>| KoMen: Domain Knowledge Guided Interaction for Emerging Scenarios |
+                                <br>| Vision-Language Pre-Training for Boosting Scene Text Detectors |
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-    </div> -->
+            <div class="display-item" id="display-item-2">
+                <div class="comparison-container">
+                    <div class="comparison-panel input-panel">
+                        <div class="panel-label">Image/Video input</div>
+                        <div class="panel-content">
+                            <img src="asset/image_cases/case2.png" alt="Input Case Study 2">
+                        </div>
+                    </div>
+                    <div class="transform-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="comparison-panel output-panel">
+                        <div class="panel-label">Chat (Raw output)</div>
+                        <div class="panel-content">
+                            <div class="output-textarea">
+                                <strong>User:</strong>
+                                Please help me design the system in the diagram in detail and list the difficulties.
+                                <br><br>
+                                <strong>Eagle-2.5-8B:</strong>
+                                <br>The diagram seems to illustrate a conceptual system involving a data center with GPUs, a cooling system, and solar power. Here's a detailed breakdown of the system and potential difficulties:
+                                <br><br>
+                                ### System Design
+                                <br><br>
+                                1. **Data Center with GPUs:**
+                                <br>   - **Purpose:** The data center hosts GPUs, which are used for intensive computational tasks.
+                                <br>   - **Components:**
+                                <br>     - **GPUs:** High-performance computing units for parallel processing.
+                                <br>     - **Radiator:** A component for cooling, likely part of the Liquid Cooling System.
+                                <br>     - **Cooling System:** Manages thermal output from GPUs.
+                                <br>     - **1 GW Power:** Indicates the power consumption of the entire system.
+                                <br><br>
+                                2. **Solar Power:**
+                                <br>   - **Source:** The Sun generates the solar power.
+                                <br>   - **Transmission:** Solar power is harnessed and transmitted to the data center.
+                                <br><br>
+                                3. **Thermal Management:**
+                                <br>   - **Radiator and Cooling System:** Critical for maintaining optimal temperatures to prevent overheating and maintain efficiency.
+                                <br>   - **Efficiency (ε=0.9):** The radiator has a high efficiency, indicating effective heat dissipation.
+                                <br><br>
+                                ### Potential Difficulties
+                                <br><br>
+                                1. **Thermal Management:**
+                                <br>   - **Challenge:** GPUs generate significant heat, requiring efficient cooling solutions to avoid performance degradation.
+                                <br>   - **Solution:** Advanced liquid cooling systems with high-efficiency radiators and robust airflow design.
+                                <br><br>
+                                2. **Power Efficiency:**
+                                <br>   - **Challenge:** High power consumption (1 GW) can be costly and require reliable power sources.
+                                <br>   - **Solution:** Utilize renewable energy sources like solar power to reduce operational costs and environmental impact.
+                                <br><br>
+                                3. **Integration:**
+                                <br>   - **Challenge:** Integrating solar power into the data center's power infrastructure requires sophisticated energy management systems.
+                                <br>   - **Solution:** Use smart inverters and energy storage systems to balance supply and demand.
+                                <br><br>
+                                4. **Scalability:**
+                                <br>   - **Challenge:** Ensuring the system can scale with increasing computational demands.
+                                <br>   - **Solution:** Modular architecture to add more GPUs or cooling capacity as needed.
+                                <br><br>
+                                5. **Reliability:**
+                                <br>   - **Challenge:** Maintaining high uptime with complex cooling and power systems.
+                                <br>   - **Solution:** Redundant cooling systems and power backup (e.g., batteries or generators).
+                                <br><br>
+                                6. **Environmental Factors:**
+                                <br>   - **Challenge:** Outdoor solar power systems are exposed to weather conditions.
+                                <br>   - **Solution:** Use weather-resistant materials and designs to ensure reliability.
+                                <br><br>
+                                By addressing these challenges, the system can achieve high performance, efficiency, and reliability while leveraging renewable energy sources.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="display-item" id="display-item-3">
+                <div class="comparison-container">
+                    <div class="comparison-panel input-panel">
+                        <div class="panel-label">Image/Video input</div>
+                        <div class="panel-content">
+                            <img src="asset/image_cases/case3_image1.png" alt="Input Case Study 3">
+                            <img src="asset/image_cases/case3_image2.png" alt="Input Case Study 3">
+                        </div>
+                    </div>
+                    <div class="transform-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="comparison-panel output-panel">
+                        <div class="panel-label">Chat (Raw output)</div>
+                        <div class="panel-content">
+                            <div class="output-textarea">
+                                <strong>User:</strong>
+                                Please infer step by step who this manuscript belongs to and what it records.
+                                <br><br>
+                                <strong>Eagle-2.5-8B:</strong>
+                                <br>The manuscript appears to be from Albert Einstein, given the mathematical complexity and the handwriting style. It records his work on the field equations of general relativity and the related calculations for the gravitational constant $ G $ and related constants. The presence of variables like $ \sum $, $ \epsilon $, and $ \frac{G}{c^2} $ suggests advanced theoretical physics, likely related to Einstein's work on the theory of relativity.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="display-item" id="display-item-4">
+                <div class="comparison-container">
+                    <div class="comparison-panel input-panel">
+                        <div class="panel-label">Image/Video input</div>
+                        <div class="panel-content">
+                            <video controls>
+                                <source src="asset/video_cases/dense_caption.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                    <div class="transform-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="comparison-panel output-panel">
+                        <div class="panel-label">Chat (Raw output)</div>
+                        <div class="panel-content">
+                            <div class="output-textarea">
+                                <strong>User:</strong><br>
+                                Analyze the video and divide it into distinct sections. For each section, create a title using a few words or phrases, and a detailed caption describing the content of the section, and indicate when it begins in seconds. Multiple sections are separated by line breaks.
+                                <br><br>
+                                <strong>Eagle-2.5-8B:</strong><br>
+                                
+                                1.05 seconds, Introduction<br>
+                                detailed caption: The clip begins with a majestic scene of a warrior standing atop a mountaintop, surrounded by mystical energy. The warrior is adorned in ornate, decorated armor with intricate patterns and elaborate designs. The background features a misty, ethereal landscape with mountains in the distance. The warrior then climbs a large stone adorned with intricate engravings. The stone is massive, set amidst a mystical and serene environment with other towering rocks nearby. As the warrior ascends, the camera zooms in to reveal the detailed engravings on the stone, showcasing its ancient and mystical nature. The scene transitions to the warrior reaching the top of the stone and spreading his arms wide, standing victorious. Suddenly, the focus shifts to a mystical figure in flowing robes, who appears to be a sage or a mystical character, standing amidst the rocky landscape. This figure is illuminated by an otherworldly light, suggesting his power and wisdom. The clip concludes with this mystical character appearing calm and serene, hinting at a connection to the warrior and the stone, underscoring themes of power, wisdom, and mystical journey.<br><br>
 
-    <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
+                                5.99 seconds, Explaining game genre<br>
+                                detailed caption: The clip begins with a character dressed in ornate armor, moving stealthily through a forest and up a mountain. The camera focuses on the intricate details of the armor, which has elaborate patterns and is adorned with gold accents. As the character ascends, a large, mystical landscape with towering trees and distant mountains comes into view. The character is then seen standing on the mountaintop, with an ethereal glow surrounding them. The camera shifts to show a wide view of the sky with clouds, creating a dramatic backdrop. Next, the character engages in combat, wielding a large weapon amidst an army dressed similarly, with a focus on their coordinated attack. The action intensifies as the character fights against a large, stone statue, which has a menacing expression and rough, textured surface. The clip continues with another character in white robes, who seems to be casting spells or invoking some form of power. The environment transitions to a snowy battlefield where the main character battles against another warrior, engaging in dynamic combat moves. The scene is filled with dramatic lighting effects, showing the two warriors clashing amidst a snowy landscape with large statues looming in the background. The clip concludes with the two characters continuing their intense battle, with the main character executing elaborate and powerful strikes.<br><br>
 
-        // Next/previous controls
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
+                                517.10 seconds, Discussing controls<br>
+                                detailed caption: The clip begins with two warriors locked in combat, using long, decorated staffs to strike each other in an icy landscape. The scene is intense, with the warriors demonstrating precise and powerful movements. As they clash, the camera shifts to focus on a mystical figure wearing ornate armor and a crown, who appears to be engaging in a magical ritual or challenge. The warrior in white robes seems to be performing a spell, summoning glowing lights and energy. The camera captures the intricate details of the armor, showing dragon and lion motifs intricately etched into the metal. As the scene progresses, the warrior in white robes is seen riding a large, mystical beast, which attacks the main warrior, creating a swirling vortex of energy. The background features a mountainous landscape, adding to the epic and fantastical atmosphere. The clip concludes with the warrior in white robes standing triumphantly, holding his staff aloft, as the spell they cast manifests before them, demonstrating their power and mastery over the mystical forces.<br><br>
 
-        // Thumbnail image controls
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
+                                614.53 seconds, Talking about story & characters<br>
+                                detailed caption: The clip begins with a wide shot of a vast forest with tall trees, and mountains visible in the distance partially covered by mist. The sky is bright and clear, suggesting a peaceful morning. The scene then transitions to a close-up of a mystical, swirling black rock with intricate patterns upon its surface. A hand, presumably belonging to a character named Wukong, reaches out and touches the rock, causing it to shift and reveal a hidden passage. As the hand touches the rock, a transformation appears to begin, symbolizing awakening or revelation. Next, the scene shifts to a different location where Wukong stands on a rocky terrain with trees and a mountainous backdrop, suggesting a connection to nature and ancient wisdom. Wukong is dressed in simple, flowing robes, and with an air of contemplation, gazes off into the distance. The clip transitions to another scene where Wukong is now seen in a more rugged outfit, equipped with a large staff, indicating a readiness for adventure or confrontation. The clip captures the essence of a journey filled with mystery, self-discovery, and the pursuit of enlightenment. Throughout the clip, text appears in Chinese characters, providing context and narrative to the unfolding story, including the names 'Wukong' (in both the original script and pinyin) and 'Peng Lao Dang,' adding depth to the characters and their world.<br><br>
 
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("demo");
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
-        }
+                                698.69 seconds, Describing visuals & sound<br>
+                                detailed caption: The clip begins with an ancient stone structure partially submerged in the ocean, its smooth, curved surface hinting at its historical significance. As the camera pans out, large waves crash against the structure, creating a powerful and dramatic atmosphere. The water is a deep blue, and the waves crash with great force, splashing white foam around. In the next scene, the setting shifts to a lush forest at dusk, where dense foliage is illuminated by golden light filtering through the trees. The scene captures the tranquility and beauty of nature, with the play of light and shadow creating a mystical ambiance. The forest then transforms into a rocky mountainous terrain, where a waterfall cascades down a cliff. The water is clear, and the rocks are rugged, emphasizing the raw power of nature. Finally, the clip returns to the mystical realm, where a large, ancient stone stands in a serene landscape. This stone is covered in intricate carvings and stands as a testament to the enduring legacy of the place. The camera lingers on the details of the carvings, highlighting the artistry and craftsmanship of the ancient civilization. The clip concludes with a close-up of the stone, capturing the fine details and the texture of the carvings, leaving a lasting impression of the historical and natural beauty depicted throughout the clip.<br><br>
 
-    </script>
+                                738.62 seconds, Closing<br>
+                                detailed caption: The clip begins with a character with white hair and a beard, wearing a loose robe and a beaded necklace, extending their hand towards a large, swirling rock on a rocky mountain. The rock features intricate designs that appear to be swirling patterns. The action proceeds as the character touches the rock, and the rock starts to glow with a mystical light, suggesting a magical transformation or unlocking of power. As the character's hand makes contact with the rock, the surroundings become more luminous, highlighting the magical ambiance. The scene transitions to the character walking away from the rock, moving down a series of rocky steps into a valley. As the character descends, more characters dressed in similar attire come into view, implying a gathering or a quest. The video captures the mystical atmosphere of the mountainous landscape, emphasizing the character's interaction with the rock and the mystical surroundings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="display-item" id="display-item-5">
+                <div class="comparison-container">
+                    <div class="comparison-panel input-panel">
+                        <div class="panel-label">Image/Video input</div>
+                        <div class="panel-content">
+                            <video controls>
+                                <source src="asset/video_cases/temporal_grounding.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                    <div class="transform-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="comparison-panel output-panel">
+                        <div class="panel-label">Chat (Raw output)</div>
+                        <div class="panel-content">
+                            <div class="output-textarea">
+                                <strong>User:</strong>
+                                Find time intervals in the video when the query occurs.\nQuery: ‘a person walks down stairs drinking from a glass bottle.’
+                                <br><br>
+                                <strong>Eagle-2.5-8B:</strong>
+                                <br>1.10s - 8.46s
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="display-item" id="display-item-6">
+                <div class="comparison-container">
+                    <div class="comparison-panel input-panel">
+                        <div class="panel-label">Image/Video input</div>
+                        <div class="panel-content">
+                            <video controls>
+                                <source src="asset/video_cases/unusual.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                    <div class="transform-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="comparison-panel output-panel">
+                        <div class="panel-label">Chat (Raw output)</div>
+                        <div class="panel-content">
+                            <div class="output-textarea">
+                                <strong>User:</strong>
+                                What is unusual in the video?
+                                <br><br>
+                                <strong>Eagle-2.5-8B:</strong>
+                                <br>The video shows a surreal and unusual scene of bears sitting at a table and eating sushi. This is highly unconventional, as bears are wild animals that wouldn’t typically dine in a human-like setting. The bears are depicted using chopsticks to eat sushi, which is a very specific cultural action associated with human dining.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="thumbnail-container">
+            <button class="scroll-btn left" id="scroll-left">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="thumbnails-wrapper">
+                <div class="thumbnails">
+                    <div class="thumbnail active" data-target="display-item-1">
+                        <img src="asset/image_cases/case1.gif" alt="Thumbnail 1">
+                        <div class="thumbnail-caption">Video OCR</div>
+                    </div>
+                    <div class="thumbnail" data-target="display-item-2">
+                        <img src="asset/image_cases/case2.png" alt="Thumbnail 2">
+                        <div class="thumbnail-caption">High-Resolution Documents</div>
+                    </div>
+                    <div class="thumbnail" data-target="display-item-3">
+                        <img src="asset/image_cases/case3_image1.png" alt="Thumbnail 3">
+                        <div class="thumbnail-caption">Image Reasoning</div>
+                    </div>
+                    <div class="thumbnail" data-target="display-item-4">
+                        <video muted preload="metadata">
+                            <source src="asset/video_cases/dense_caption.mp4" type="video/mp4">
+                        </video>
+                        <div class="thumbnail-caption">Dense Video Caption</div>
+                    </div>
+                    <div class="thumbnail" data-target="display-item-5">
+                        <video muted preload="metadata">
+                            <source src="asset/video_cases/temporal_grounding.mp4" type="video/mp4">
+                        </video>
+                        <div class="thumbnail-caption">Temporal Grounding</div>
+                    </div>
+                    <div class="thumbnail" data-target="display-item-6">
+                        <video muted preload="metadata">
+                            <source src="asset/video_cases/unusual.mp4" type="video/mp4">
+                        </video>
+                        <div class="thumbnail-caption">Unusual Events</div>
+                    </div>
+                </div>
+            </div>
+            <button class="scroll-btn right" id="scroll-right">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
     <style>
-        * {
-            box-sizing: border-box;
+        /* Case Gallery Styles */
+        .case-gallery-container {
+            max-width: 90%;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* Position the image container (needed to position the left and right arrows) */
-        .container {
+        .main-display {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .display-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* Prevent interaction with hidden items */
+            z-index: 0; /* Keep hidden items behind */
+        }
+
+        .display-item.active {
+            opacity: 1;
+            z-index: 2; /* Ensure active item is on top */
+            pointer-events: auto; /* Allow interaction with active item */
+        }
+
+        .display-item img, .display-item video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .thumbnail-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .thumbnails-wrapper {
+            width: 100%;
+            overflow: hidden;
             position: relative;
         }
 
-        /* Hide the images by default */
-        .mySlides {
-            display: none;
+        .thumbnails {
+            display: flex;
+            transition: transform 0.5s ease;
+            padding: 5px 0;
         }
 
-        /* Add a pointer when hovering over the thumbnail images */
-        .cursor {
+        .thumbnail {
+            flex: 0 0 auto;
+            width: 180px;
+            margin-right: 15px;
+            border-radius: 10px;
+            overflow: hidden;
             cursor: pointer;
-            width: 100%;
-            /* height: 50pt; */
-            object-fit: contain;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            position: relative;
         }
 
-        /* Next & previous buttons */
-        .prev,
-        .next {
-            cursor: pointer;
-            position: absolute;
-            /* top: 40%; */
-            top: 110pt;
-            width: auto;
-            padding: 16px;
-            margin-top: -50px;
-            color: white;
-            background-color: #00000030;
-            font-weight: bold;
-            font-size: 20px;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            -webkit-user-select: none;
+        .thumbnail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0.9;
         }
 
-        .prev {
-            left: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        .next {
-            right: 0;
-            border-radius: 0 3px 3px 0;
-        }
-
-        /* Position the "next button" to the right */
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        /* On hover, add a black background color with a little bit see-through */
-        .prev:hover,
-        .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Number text (1/3 etc) */
-        .numbertext {
-            color: #000000;
-            background-color: white;
-            opacity: 0.3;
-            font-size: 12px;
-            padding: 8px 12px;
-            position: absolute;
-            top: 0;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* Six columns side by side */
-        .column-gallery {
-            float: left;
-            width: 16.66%;
-        }
-
-        /* Add a transparency effect for thumnbail images */
-        .demo {
-            border: #000000;
-            /* border-radius: 15px; */
-            color: #00000030;
-            opacity: 0.3;
-        }
-
-        .active,
-        .demo:hover {
+        .thumbnail.active {
             opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border: 2px solid #76b900;
+        }
+
+        .thumbnail img, .thumbnail video {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .thumbnail-caption {
+            text-align: center;
+            padding: 8px 5px;
+            font-size: 0.85em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .scroll-btn {
+            background-color: #76b900;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .scroll-btn:hover {
+            background-color: #5f9700;
+            transform: scale(1.1);
+        }
+
+        .scroll-btn.left {
+            left: -20px;
+        }
+
+        .scroll-btn.right {
+            right: -20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-display {
+                height: 300px;
+            }
+            
+            .thumbnail {
+                width: 140px;
+                margin-right: 10px;
+            }
+
+            .thumbnail img, .thumbnail video {
+                height: 80px;
+            }
+
+            .scroll-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Add these new styles for side-by-side comparison */
+        .comparison-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            gap: 15px;
+        }
+        
+        .input-side, .output-side {
+            width: 49%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .input-side img, .output-side img, .input-side video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .divider {
+            width: 2px;
+            height: 90%;
+            background-color: #76b900;
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-container {
+                flex-direction: column;
+            }
+            
+            .input-side, .output-side {
+                width: 100%;
+                height: 49%;
+            }
+            
+            .divider {
+                width: 90%;
+                height: 2px;
+                margin: 5px 0;
+            }
+        }
+
+        /* Updated styles for improved input/output comparison */
+        .comparison-panel {
+            width: 47%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            transition: transform 0.3s ease;
+        }
+        
+        .comparison-panel:hover {
+            transform: translateY(-5px);
+        }
+        
+        .panel-label {
+            background-color: #76b900;
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .input-panel .panel-label {
+            background-color: #2d7dd2;
+        }
+        
+        .output-panel .panel-label {
+            background-color: #76b900;
+        }
+        
+        .panel-content {
+            flex: 1;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            overflow: hidden;
+        }
+        
+        .panel-content img, .panel-content video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            width: auto;
+            height: auto;
+        }
+        
+        /* Handle portrait-oriented content better */
+        .comparison-container .input-panel .panel-content img {
+            max-height: 100%;
+            width: auto;
+            object-position: center;
+        }
+        
+        .transform-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #76b900;
+            font-size: 24px;
+            background-color: rgba(118, 185, 0, 0.1);
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-container {
+                flex-direction: column;
+            }
+            
+            .comparison-panel {
+                width: 100%;
+                height: auto;
+                margin-bottom: 15px;
+            }
+            
+            .transform-arrow {
+                transform: rotate(90deg);
+                margin: 5px 0;
+            }
+        }
+
+        .output-textarea {
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            line-height: 1.5;
+            overflow-y: auto;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: left;
+            white-space: pre-line;
+        }
+        
+        .output-textarea:focus {
+            outline: none;
+        }
+        
+        /* Make output textarea work with animations */
+        .fade-in .output-textarea,
+        .from-left .output-textarea,
+        .from-right .output-textarea,
+        .scale-in .output-textarea {
+            transition: inherit;
         }
     </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables for the gallery
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const displayItems = document.querySelectorAll('.display-item');
+            const thumbnailsContainer = document.querySelector('.thumbnails');
+            const scrollLeftBtn = document.getElementById('scroll-left');
+            const scrollRightBtn = document.getElementById('scroll-right');
+            
+            // Set up thumbnail click events
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    // Reset active states
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    displayItems.forEach(d => {
+                        d.classList.remove('active');
+                        // Ensure complete hide when inactive
+                        d.style.opacity = '0';
+                    });
+                    
+                    // Set active state for clicked thumbnail
+                    this.classList.add('active');
+                    
+                    // Show corresponding display item
+                    const targetId = this.getAttribute('data-target');
+                    const targetItem = document.getElementById(targetId);
+                    targetItem.classList.add('active');
+                    targetItem.style.opacity = '1';
+                    
+                    // Scroll to make active thumbnail visible if needed
+                    scrollToActiveThumbnail();
+                });
+            });
+            
+            // Horizontal scrolling for thumbnails
+            let scrollAmount = 0;
+            const scrollStep = 200;
+            
+            scrollLeftBtn.addEventListener('click', function() {
+                scrollAmount = Math.max(0, scrollAmount - scrollStep);
+                thumbnailsContainer.style.transform = `translateX(-${scrollAmount}px)`;
+            });
+            
+            scrollRightBtn.addEventListener('click', function() {
+                const maxScroll = thumbnailsContainer.scrollWidth - document.querySelector('.thumbnails-wrapper').clientWidth;
+                scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
+                thumbnailsContainer.style.transform = `translateX(-${scrollAmount}px)`;
+            });
+            
+            // Function to ensure active thumbnail is visible
+            function scrollToActiveThumbnail() {
+                const activeThumbnail = document.querySelector('.thumbnail.active');
+                if (activeThumbnail) {
+                    const thumbnailRect = activeThumbnail.getBoundingClientRect();
+                    const containerRect = document.querySelector('.thumbnails-wrapper').getBoundingClientRect();
+                    
+                    if (thumbnailRect.left < containerRect.left) {
+                        scrollAmount -= (containerRect.left - thumbnailRect.left + 20);
+                    } else if (thumbnailRect.right > containerRect.right) {
+                        scrollAmount += (thumbnailRect.right - containerRect.right + 20);
+                    }
+                    
+                    scrollAmount = Math.max(0, scrollAmount);
+                    const maxScroll = thumbnailsContainer.scrollWidth - document.querySelector('.thumbnails-wrapper').clientWidth;
+                    scrollAmount = Math.min(maxScroll, scrollAmount);
+                    
+                    thumbnailsContainer.style.transform = `translateX(-${scrollAmount}px)`;
+                }
+            }
+            
+            // Initialize with proper button visibility
+            updateScrollButtonsVisibility();
+            
+            // Update scroll buttons visibility based on scroll position
+            function updateScrollButtonsVisibility() {
+                const maxScroll = thumbnailsContainer.scrollWidth - document.querySelector('.thumbnails-wrapper').clientWidth;
+                
+                scrollLeftBtn.style.display = scrollAmount <= 0 ? 'none' : 'flex';
+                scrollRightBtn.style.display = scrollAmount >= maxScroll ? 'none' : 'flex';
+            }
+            
+            // Add resize listener to handle responsive changes
+            window.addEventListener('resize', updateScrollButtonsVisibility);
+        });
+    </script>
 
     <!-- The Modal -->
     <div id="modal" onclick="this.style.display='none'">
