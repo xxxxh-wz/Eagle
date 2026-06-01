@@ -1,0 +1,33 @@
+{
+  "image": "/home/user/code/eagle/Embodied/test_assets/locateanything_kite.png",
+  "queries": [
+    {
+      "task": "ground_single",
+      "query": "the colorful kite",
+      "answer": "<ref>the colorful kite</ref><box><592><243><743><574></box><|im_end|>",
+      "boxes": [
+        {
+          "x1": 857.216,
+          "y1": 263.89799999999997,
+          "x2": 1075.864,
+          "y2": 623.3639999999999
+        }
+      ],
+      "stats": "\nStatistic Info, num_tokens=12; generate_time(s)=1.4305; tps=8.3888; forward_step=3; num_boxes=1; bps=0.6991; prefill_time=1.3397; switch_to_ar=0\n"
+    },
+    {
+      "task": "ground_multi",
+      "query": "power poles",
+      "answer": "<ref>power poles</ref><box><0><0><102><663></box><|im_end|>",
+      "boxes": [
+        {
+          "x1": 0.0,
+          "y1": 0.0,
+          "x2": 147.696,
+          "y2": 720.018
+        }
+      ],
+      "stats": "\nStatistic Info, num_tokens=11; generate_time(s)=0.9925; tps=11.0831; forward_step=6; num_boxes=1; bps=1.0076; prefill_time=0.7972; switch_to_ar=1\n"
+    }
+  ]
+}
